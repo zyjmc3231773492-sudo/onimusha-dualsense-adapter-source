@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <PlatformTarget>x64</PlatformTarget>
+    <DefineConstants>$(DefineConstants);ONIMUSHA_BLUETOOTH_ENABLED</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/Product.Core/OnimushaPS5Adapter.Core.csproj" />
+    <Compile Include="../../src/Manager/DeviceConnectionService.cs" Link="DeviceConnectionService.cs" />
+    <Compile Include="../../src/Manager/UiText.cs" Link="UiText.cs" />
+    <EmbeddedResource Include="../../src/Manager/Localization/*.json"
+                      LogicalName="OnimushaPS5Adapter.Manager.Localization.%(Filename)%(Extension)" />
+  </ItemGroup>
+</Project>

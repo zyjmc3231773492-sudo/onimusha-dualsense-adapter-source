@@ -1,0 +1,716 @@
+<Window x:Class="OnimushaPS5Adapter.Manager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{DynamicResource AppTitle2}"
+        Width="1120" Height="740" MinWidth="980" MinHeight="660"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource PageBackground}"
+        Foreground="{StaticResource PrimaryTextBrush}"
+        FontFamily="Microsoft YaHei UI"
+        UseLayoutRounding="True"
+        TextOptions.TextFormattingMode="Display">
+    <Window.Resources>
+        <Style x:Key="SoundPreviewButton" TargetType="Button" BasedOn="{StaticResource SamuraiButton}">
+            <Setter Property="Padding" Value="10,4" />
+            <Setter Property="MinWidth" Value="0" />
+            <Setter Property="MinHeight" Value="28" />
+            <Setter Property="Visibility" Value="Collapsed" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="88" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="34" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="{StaticResource HeaderBackground}"
+                BorderBrush="{StaticResource GoldDarkBrush}" BorderThickness="0,0,0,1">
+            <Grid Margin="24,13">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="56" />
+                    <ColumnDefinition Width="18" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="158" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Border Width="52" Height="52" BorderBrush="{StaticResource CrimsonBrush}"
+                        BorderThickness="1" CornerRadius="2" Background="#180D0B">
+                    <Grid>
+                        <Border Width="36" Height="36" BorderBrush="#5C211D" BorderThickness="1" />
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Foreground="#C85D52" FontSize="23" FontWeight="SemiBold" Text="{DynamicResource Oni}" />
+                    </Grid>
+                </Border>
+                <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                    <TextBlock Foreground="{StaticResource PrimaryTextBrush}" FontSize="21"
+                               FontWeight="SemiBold" Text="{DynamicResource TrayTitle}" />
+                    <TextBlock Margin="1,4,0,0" Foreground="{StaticResource MutedTextBrush}" FontSize="11"
+                               Text="{DynamicResource UnofficialEventDrivenDualsenseEnhancement}" />
+                </StackPanel>
+                <StackPanel Grid.Column="3" Margin="8,0,16,0" VerticalAlignment="Center">
+                    <TextBlock Style="{StaticResource EyebrowText}" Text="{DynamicResource UiLanguage}" />
+                    <ComboBox x:Name="LanguageCombo" Margin="0,4,0,0" MinHeight="28"
+                              Background="#17150F" Foreground="#12120F" SelectionChanged="LanguageChanged">
+                        <ComboBoxItem Content="简体中文" Tag="zh-CN" />
+                        <ComboBoxItem Content="English" Tag="en-US" />
+                    </ComboBox>
+                </StackPanel>
+                <Border Grid.Column="4" Padding="14,8" VerticalAlignment="Center"
+                        Background="#0C0B09" BorderBrush="#4C3E22" BorderThickness="1" CornerRadius="2">
+                    <StackPanel>
+                        <TextBlock HorizontalAlignment="Right" Style="{StaticResource EyebrowText}"
+                                   Text="{DynamicResource ProductVersion}" />
+                        <TextBlock x:Name="ProductVersionText" Margin="0,2,0,0"
+                                   Foreground="{StaticResource PrimaryTextBrush}"
+                                   FontSize="13" Text="{DynamicResource ReadingVersion}" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+
+        <TabControl Grid.Row="1" x:Name="MainTabs" Style="{StaticResource SamuraiTabControl}">
+            <TabItem Header="{DynamicResource Overview}" Style="{StaticResource SamuraiTabItem}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel Margin="30,24,30,12">
+                        <TextBlock Style="{StaticResource EyebrowText}" Text="{DynamicResource OverviewCurrentStatus}" />
+                        <TextBlock Margin="0,5,0,18" Style="{StaticResource SectionTitle}" Text="{DynamicResource AdapterOverview}" />
+
+                        <Border Style="{StaticResource CardBorder}" Padding="0" Height="234">
+                            <Grid ClipToBounds="True">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="47*" />
+                                    <ColumnDefinition Width="53*" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" BorderBrush="#4E4024" BorderThickness="0,0,1,0"
+                                        Background="#0B0907" ClipToBounds="True">
+                                    <Grid>
+                                        <Image Margin="12,8,12,24" Source="Assets/manager-controller-art-v1.png"
+                                               Stretch="Uniform" Opacity="0.95" />
+                                        <Rectangle VerticalAlignment="Bottom" Height="68">
+                                            <Rectangle.Fill>
+                                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                    <GradientStop Offset="0" Color="#00110F0C" />
+                                                    <GradientStop Offset="1" Color="#FF110F0C" />
+                                                </LinearGradientBrush>
+                                            </Rectangle.Fill>
+                                        </Rectangle>
+                                        <TextBlock Margin="18,0,0,13" VerticalAlignment="Bottom"
+                                                   Foreground="#C7AE70" FontSize="10"
+                                                   Text="{DynamicResource OriginalControllerIllustration}" />
+                                    </Grid>
+                                </Border>
+
+                                <Grid Grid.Column="1" Margin="26,22">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <DockPanel LastChildFill="True">
+                                        <Border x:Name="DeviceStatusDot" DockPanel.Dock="Left" Width="10" Height="10"
+                                                Margin="0,4,12,0" CornerRadius="5" Background="#5D574B" />
+                                        <StackPanel>
+                                            <TextBlock Style="{StaticResource EyebrowText}" Text="{DynamicResource ControllerStatus}" />
+                                            <TextBlock x:Name="DeviceStatusText" Margin="0,5,0,0" FontSize="24"
+                                                       FontWeight="Bold" Foreground="{StaticResource PrimaryTextBrush}"
+                                                       Text="{DynamicResource Detecting}" />
+                                        </StackPanel>
+                                    </DockPanel>
+                                    <TextBlock Grid.Row="1" x:Name="DeviceStatusDetailText" Margin="22,14,0,0"
+                                               Foreground="{StaticResource MutedTextBrush}" FontSize="13"
+                                               LineHeight="21" TextWrapping="Wrap"
+                                               Text="{DynamicResource CheckingUsbBluetoothHidDevices}" />
+                                    <Border Grid.Row="2" Padding="12,9" Background="#0B0B09"
+                                            BorderBrush="#44391F" BorderThickness="1" CornerRadius="2">
+                                        <TextBlock x:Name="InstallStatusText" Foreground="#A8A397"
+                                                   FontSize="12" LineHeight="18" TextWrapping="Wrap" />
+                                    </Border>
+                                </Grid>
+                            </Grid>
+                        </Border>
+
+                        <Grid Margin="0,16,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="16" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Foreground="{StaticResource PrimaryTextBrush}" FontWeight="SemiBold"
+                                           Text="{DynamicResource GameFolder}" />
+                                <TextBox x:Name="GamePathText" />
+                            </StackPanel>
+                            <Button Grid.Column="2" Margin="0,30,0,7" MinWidth="98"
+                                    Content="{DynamicResource Browse}" Click="BrowseGame_Click" />
+                        </Grid>
+
+                        <WrapPanel Margin="0,11,0,0">
+                            <Button Style="{StaticResource GoldButton}" MinWidth="142"
+                                    Content="{DynamicResource InstallRepair}" Click="Repair_Click" />
+                            <Button MinWidth="142" Content="{DynamicResource TrayLaunch}" Click="LaunchGame_Click" />
+                            <Button MinWidth="116" Content="{DynamicResource RefreshStatus}" Click="Refresh_Click" />
+                            <Button Style="{StaticResource DangerButton}" MinWidth="142"
+                                    Content="{DynamicResource RemoveBridge}" Click="Uninstall_Click" />
+                        </WrapPanel>
+
+                        <Border Margin="0,13,0,0" Style="{StaticResource CardBorder}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock FontSize="17" FontWeight="SemiBold" Text="{DynamicResource StartWithWindows}" />
+                                    <TextBlock x:Name="StartupStatusText" Margin="0,7,0,0"
+                                               Foreground="{StaticResource GoldBrush}" FontSize="11" />
+                                </StackPanel>
+                                <CheckBox Grid.Column="1" x:Name="StartupCheck"
+                                          Style="{StaticResource ToggleSwitch}"
+                                          VerticalAlignment="Center"
+                                          AutomationProperties.Name="{DynamicResource StartWithWindows}"
+                                          ToolTip="{DynamicResource StartTheManagerWhenSigningInToWindows}"
+                                          Checked="StartupChanged" Unchecked="StartupChanged" />
+                            </Grid>
+                        </Border>
+
+                        <Border Margin="0,13,0,0" Padding="14,10" Background="#100E0B"
+                                BorderBrush="{StaticResource GoldDarkBrush}" BorderThickness="1,0,0,0">
+                            <TextBlock Foreground="#918D83" FontSize="11" TextWrapping="Wrap" LineHeight="18">
+                                <Run Foreground="{StaticResource GoldBrightBrush}" FontWeight="SemiBold" Text="{DynamicResource SetupNote}" />
+                                <Run Text="{DynamicResource InSteamOpenTheGameSPropertiesControllerAndKeep}" />
+                                <LineBreak />
+                                <Run Text="{DynamicResource TheReframeworkMenuIsHiddenByDefaultPressInsertTo}" />
+                            </TextBlock>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="{DynamicResource AdapterSettings}" Style="{StaticResource SamuraiTabItem}">
+                <ScrollViewer x:Name="SettingsScrollViewer"
+                              VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel Margin="30,24,30,30">
+                        <TextBlock Style="{StaticResource EyebrowText}" Text="{DynamicResource AdapterSettings2}" />
+                        <TextBlock Margin="0,5,0,4" Style="{StaticResource SectionTitle}" Text="{DynamicResource AdapterSettings}" />
+                        <TextBlock Margin="0,0,0,18" Foreground="{StaticResource MutedTextBrush}"
+                                   Text="{DynamicResource TheGameReadsTheseSettingsAutomaticallyWhileRunningNoIn}" />
+
+                        <Border Style="{StaticResource CardBorder}" Margin="0,0,0,14">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource EyebrowText}" Text="{DynamicResource HapticFeedback}" />
+                                <Grid Margin="0,10,0,0">
+                                    <TextBlock FontSize="17" FontWeight="SemiBold" Text="{DynamicResource HapticIntensity}" />
+                                    <TextBlock x:Name="HapticIntensityText" HorizontalAlignment="Right"
+                                               Foreground="{StaticResource GoldBrightBrush}" />
+                                </Grid>
+                                <TextBlock Margin="0,5,0,6" Foreground="{StaticResource MutedTextBrush}"
+                                           TextWrapping="Wrap" LineHeight="20"
+                                           Text="{DynamicResource AdjustsHapticsForFootstepsCombatDamageMenusInteractionsAndThe}" />
+                                <Slider x:Name="HapticIntensitySlider"
+                                        Style="{StaticResource PercentSlider}"
+                                        ValueChanged="SettingChanged"
+                                        AutomationProperties.Name="{DynamicResource HapticIntensity}" />
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource CardBorder}" Margin="0,0,0,14">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource EyebrowText}" Text="{DynamicResource CombatHaptics}" />
+                                <TextBlock Margin="0,6,0,0" Foreground="{StaticResource MutedTextBrush}"
+                                           TextWrapping="Wrap" LineHeight="20"
+                                           Text="{DynamicResource AdjustEachAddedCombatEffectSeparatelyOverallHapticIntensityStill}" />
+
+                                <Grid Margin="0,16,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Margin="0,0,30,0">
+                                        <Grid>
+                                            <TextBlock FontSize="17" FontWeight="SemiBold" Text="{DynamicResource Guard}" />
+                                            <TextBlock x:Name="GuardHapticIntensityText" HorizontalAlignment="Right"
+                                                       Foreground="{StaticResource GoldBrightBrush}" />
+                                        </Grid>
+                                        <TextBlock Margin="0,5,0,6" Foreground="{StaticResource MutedTextBrush}"
+                                                   TextWrapping="Wrap" LineHeight="20"
+                                                   Text="{DynamicResource WeightyFeedbackForRegularAndDirectionalGuards}" />
+                                        <Slider x:Name="GuardHapticIntensitySlider"
+                                                Style="{StaticResource PercentSlider}"
+                                                ValueChanged="SettingChanged"
+                                                AutomationProperties.Name="{DynamicResource GuardHapticIntensity}" />
+                                    </StackPanel>
+                                    <CheckBox Grid.Column="1" x:Name="GuardHapticCheck"
+                                              Style="{StaticResource ToggleSwitch}"
+                                              AutomationProperties.Name="{DynamicResource GuardHaptics}"
+                                              Checked="SettingChanged" Unchecked="SettingChanged" />
+                                </Grid>
+
+                                <Border Margin="0,16" BorderBrush="#302B20" BorderThickness="0,1,0,0" />
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Margin="0,0,30,0">
+                                        <Grid>
+                                            <TextBlock FontSize="17" FontWeight="SemiBold" Text="{DynamicResource Parry}" />
+                                            <TextBlock x:Name="ParryHapticIntensityText" HorizontalAlignment="Right"
+                                                       Foreground="{StaticResource GoldBrightBrush}" />
+                                        </Grid>
+                                        <TextBlock Margin="0,5,0,6" Foreground="{StaticResource MutedTextBrush}"
+                                                   TextWrapping="Wrap" LineHeight="20"
+                                                   Text="{DynamicResource FeedbackForParryingAMeleeAttackOrDeflectingAProjectile}" />
+                                        <Slider x:Name="ParryHapticIntensitySlider"
+                                                Style="{StaticResource PercentSlider}"
+                                                ValueChanged="SettingChanged"
+                                                AutomationProperties.Name="{DynamicResource ParryHapticIntensity}" />
+                                    </StackPanel>
+                                    <CheckBox Grid.Column="1" x:Name="ParryHapticCheck"
+                                              Style="{StaticResource ToggleSwitch}"
+                                              AutomationProperties.Name="{DynamicResource ParryHaptics}"
+                                              Checked="SettingChanged" Unchecked="SettingChanged" />
+                                </Grid>
+
+                                <Border Margin="0,16" BorderBrush="#302B20" BorderThickness="0,1,0,0" />
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Margin="0,0,30,0">
+                                        <Grid>
+                                            <TextBlock FontSize="17" FontWeight="SemiBold" Text="{DynamicResource Deflect}" />
+                                            <TextBlock x:Name="DeflectHapticIntensityText" HorizontalAlignment="Right"
+                                                       Foreground="{StaticResource GoldBrightBrush}" />
+                                        </Grid>
+                                        <TextBlock Margin="0,5,0,6" Foreground="{StaticResource MutedTextBrush}"
+                                                   TextWrapping="Wrap" LineHeight="20"
+                                                   Text="{DynamicResource ConvergingImpactAndConfirmationFeedbackAfterASuccessfulJustGuard}" />
+                                        <Slider x:Name="DeflectHapticIntensitySlider"
+                                                Style="{StaticResource PercentSlider}"
+                                                ValueChanged="SettingChanged"
+                                                AutomationProperties.Name="{DynamicResource DeflectHapticIntensity}" />
+                                    </StackPanel>
+                                    <CheckBox Grid.Column="1" x:Name="DeflectHapticCheck"
+                                              Style="{StaticResource ToggleSwitch}"
+                                              AutomationProperties.Name="{DynamicResource DeflectHaptics}"
+                                              Checked="SettingChanged" Unchecked="SettingChanged" />
+                                </Grid>
+
+                                <Border Margin="0,16" BorderBrush="#302B20" BorderThickness="0,1,0,0" />
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Margin="0,0,30,0">
+                                        <Grid>
+                                            <TextBlock FontSize="17" FontWeight="SemiBold" Text="{DynamicResource Issen}" />
+                                            <TextBlock x:Name="IssenHapticIntensityText" HorizontalAlignment="Right"
+                                                       Foreground="{StaticResource GoldBrightBrush}" />
+                                        </Grid>
+                                        <TextBlock Margin="0,5,0,6" Foreground="{StaticResource MutedTextBrush}"
+                                                   TextWrapping="Wrap" LineHeight="20"
+                                                   Text="{DynamicResource LateralSlashFeedbackForIssenHitsAndActionConfirmationExcluding}" />
+                                        <Slider x:Name="IssenHapticIntensitySlider"
+                                                Style="{StaticResource PercentSlider}"
+                                                ValueChanged="SettingChanged"
+                                                AutomationProperties.Name="{DynamicResource IssenHapticIntensity}" />
+                                    </StackPanel>
+                                    <CheckBox Grid.Column="1" x:Name="IssenHapticCheck"
+                                              Style="{StaticResource ToggleSwitch}"
+                                              AutomationProperties.Name="{DynamicResource IssenHaptics}"
+                                              Checked="SettingChanged" Unchecked="SettingChanged" />
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource CardBorder}" Margin="0,0,0,14">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource EyebrowText}" Text="{DynamicResource AdaptiveTriggers}" />
+                                <Grid Margin="0,14,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock FontSize="17" FontWeight="SemiBold" Text="{DynamicResource LeftTriggerL2}" />
+                                        <TextBlock Margin="0,5,30,0" Foreground="{StaticResource MutedTextBrush}"
+                                                   TextWrapping="Wrap" LineHeight="20"
+                                                   Text="{DynamicResource ControlsLeftTriggerResistanceAndVibrationForSoulAbsorptionAnd}" />
+                                    </StackPanel>
+                                    <CheckBox Grid.Column="1" x:Name="LeftAdaptiveTriggerCheck"
+                                              Style="{StaticResource ToggleSwitch}"
+                                              AutomationProperties.Name="{DynamicResource LeftAdaptiveTrigger}"
+                                              Checked="SettingChanged" Unchecked="SettingChanged" />
+                                </Grid>
+                                <Border Margin="0,16" BorderBrush="#302B20" BorderThickness="0,1,0,0" />
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock FontSize="17" FontWeight="SemiBold" Text="{DynamicResource RightTriggerR2}" />
+                                        <TextBlock Margin="0,5,30,0" Foreground="{StaticResource MutedTextBrush}"
+                                                   TextWrapping="Wrap" LineHeight="20"
+                                                   Text="{DynamicResource ControlsRightTriggerResistanceAndVibrationForTheBowAnd}" />
+                                    </StackPanel>
+                                    <CheckBox Grid.Column="1" x:Name="RightAdaptiveTriggerCheck"
+                                              Style="{StaticResource ToggleSwitch}"
+                                              AutomationProperties.Name="{DynamicResource RightAdaptiveTrigger}"
+                                              Checked="SettingChanged" Unchecked="SettingChanged" />
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource CardBorder}" Margin="0,0,0,14">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource EyebrowText}" Text="{DynamicResource EnvironmentHaptics}" />
+                                <Grid Margin="0,14,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock FontSize="17" FontWeight="SemiBold" Text="{DynamicResource RainHapticsExperimental}" />
+                                        <TextBlock Margin="0,5,30,0" Foreground="{StaticResource MutedTextBrush}"
+                                                   Text="{DynamicResource MapsChangesInRainfallToControllerHaptics}" />
+                                    </StackPanel>
+                                    <CheckBox Grid.Column="1" x:Name="RainCheck" Style="{StaticResource ToggleSwitch}"
+                                              Checked="SettingChanged" Unchecked="SettingChanged" />
+                                </Grid>
+                                <Border Margin="0,16" BorderBrush="#302B20" BorderThickness="0,1,0,0" />
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock FontSize="17" FontWeight="SemiBold" Text="{DynamicResource WindHaptics}" />
+                                        <TextBlock Margin="0,5,30,0" Foreground="{StaticResource MutedTextBrush}"
+                                                   TextWrapping="Wrap" LineHeight="20"
+                                                   Text="{DynamicResource OffByDefaultLightWindIsCommonInTheGame}" />
+                                    </StackPanel>
+                                    <CheckBox Grid.Column="1" x:Name="WindCheck" Style="{StaticResource ToggleSwitch}"
+                                              Checked="SettingChanged" Unchecked="SettingChanged" />
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource CardBorder}">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource EyebrowText}" Text="{DynamicResource ControllerSpeaker}" />
+                                <Grid Margin="0,10,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock FontSize="17" FontWeight="SemiBold" Text="{DynamicResource ControllerSpeaker}" />
+                                        <TextBlock Margin="0,5,36,0" Foreground="{StaticResource MutedTextBrush}"
+                                                   TextWrapping="Wrap" LineHeight="20"
+                                                   Text="{DynamicResource ControlsAllControllerSpeakerAudioTurningItOffMutesGauntlet}" />
+                                    </StackPanel>
+                                    <CheckBox Grid.Column="1" x:Name="ControllerSpeakerCheck"
+                                              Style="{StaticResource ToggleSwitch}"
+                                              VerticalAlignment="Center"
+                                              Checked="SettingChanged" Unchecked="SettingChanged" />
+                                </Grid>
+                                <Border Margin="0,17" BorderBrush="#302B20" BorderThickness="0,1,0,0" />
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock FontSize="17" FontWeight="SemiBold" Text="{DynamicResource OniGauntletVoiceLanguage}" />
+                                        <TextBlock Margin="0,5,36,0" Foreground="{StaticResource MutedTextBrush}"
+                                                   TextWrapping="Wrap" LineHeight="20"
+                                                   Text="{DynamicResource IndependentOfTheGameSVoiceSettingYouCanSwitch}" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal"
+                                                VerticalAlignment="Center">
+                                        <RadioButton x:Name="ChineseVoiceRadio"
+                                                     GroupName="GauntletVoiceLanguage"
+                                                     Style="{StaticResource VoiceLanguageChoice}"
+                                                     Content="{DynamicResource Chinese}" Checked="SettingChanged" />
+                                        <RadioButton x:Name="JapaneseVoiceRadio"
+                                                     GroupName="GauntletVoiceLanguage"
+                                                     Style="{StaticResource VoiceLanguageChoice}"
+                                                     Margin="0"
+                                                     Content="{DynamicResource Japanese}" Checked="SettingChanged" />
+                                    </StackPanel>
+                                </Grid>
+                                <Border Margin="0,17" BorderBrush="#302B20" BorderThickness="0,1,0,0" />
+                                <StackPanel>
+                                    <TextBlock FontSize="17" FontWeight="SemiBold" Text="{DynamicResource VolumeByCategory}" />
+                                    <TextBlock Margin="0,5,0,14" Foreground="{StaticResource MutedTextBrush}"
+                                               TextWrapping="Wrap" LineHeight="20"
+                                               Text="{DynamicResource EachCategoryIsAdjustable100IsTheCalibratedDefault0}" />
+                                    <UniformGrid Columns="2">
+                                        <StackPanel Margin="0,0,28,15">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Foreground="{StaticResource PrimaryTextBrush}" Text="{DynamicResource GauntletVoice}" VerticalAlignment="Center" />
+                                                <TextBlock Grid.Column="1" x:Name="GauntletVoiceVolumeText" Margin="12,0" VerticalAlignment="Center"
+                                                           Foreground="{StaticResource GoldBrightBrush}" />
+                                                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                                    <Button x:Name="GauntletVoicePreviewButton" Style="{StaticResource SoundPreviewButton}" Content="{DynamicResource Preview}" Tag="14" Click="SoundPreview_Click" AutomationProperties.Name="{DynamicResource PreviewGauntletVoice}" />
+                                                </StackPanel>
+                                            </Grid>
+                                            <Slider x:Name="GauntletVoiceVolumeSlider"
+                                                    Style="{StaticResource PercentSlider}"
+                                                    ValueChanged="SettingChanged"
+                                                    AutomationProperties.Name="{DynamicResource GauntletVoiceVolume}" />
+                                        </StackPanel>
+                                        <StackPanel Margin="0,0,0,15">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Foreground="{StaticResource PrimaryTextBrush}" Text="{DynamicResource SoulAbsorption}" VerticalAlignment="Center" />
+                                                <TextBlock Grid.Column="1" x:Name="SoulSpeakerVolumeText" Margin="12,0" VerticalAlignment="Center"
+                                                           Foreground="{StaticResource GoldBrightBrush}" />
+                                                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                                    <Button x:Name="SoulSpeakerPreviewButton" Style="{StaticResource SoundPreviewButton}" Content="{DynamicResource Preview}" Tag="2" Click="SoundPreview_Click" AutomationProperties.Name="{DynamicResource PreviewSoulAbsorption}" />
+                                                </StackPanel>
+                                            </Grid>
+                                            <Slider x:Name="SoulSpeakerVolumeSlider"
+                                                    Style="{StaticResource PercentSlider}"
+                                                    ValueChanged="SettingChanged"
+                                                    AutomationProperties.Name="{DynamicResource SoulAbsorptionVolume}" />
+                                        </StackPanel>
+                                        <StackPanel Margin="0,0,28,15">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Foreground="{StaticResource PrimaryTextBrush}" Text="{DynamicResource SwordClash}" VerticalAlignment="Center" />
+                                                <TextBlock Grid.Column="1" x:Name="ClashSpeakerVolumeText" Margin="12,0" VerticalAlignment="Center"
+                                                           Foreground="{StaticResource GoldBrightBrush}" />
+                                                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                                    <Button x:Name="ClashSpeakerPreviewButton" Style="{StaticResource SoundPreviewButton}" Content="{DynamicResource Preview}" Tag="4" Click="SoundPreview_Click" AutomationProperties.Name="{DynamicResource PreviewSwordClash}" />
+                                                </StackPanel>
+                                            </Grid>
+                                            <Slider x:Name="ClashSpeakerVolumeSlider"
+                                                    Style="{StaticResource PercentSlider}"
+                                                    ValueChanged="SettingChanged"
+                                                    AutomationProperties.Name="{DynamicResource SwordClashVolume}" />
+                                        </StackPanel>
+                                        <StackPanel Margin="0,0,0,15">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Foreground="{StaticResource PrimaryTextBrush}" Text="{DynamicResource Guard}" VerticalAlignment="Center" />
+                                                <TextBlock Grid.Column="1" x:Name="GuardSpeakerVolumeText" Margin="12,0" VerticalAlignment="Center"
+                                                           Foreground="{StaticResource GoldBrightBrush}" />
+                                                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                                    <Button x:Name="GuardSpeakerPreviewButton" Style="{StaticResource SoundPreviewButton}" Content="{DynamicResource Preview}" Tag="5" Click="SoundPreview_Click" AutomationProperties.Name="{DynamicResource PreviewGuard}" />
+                                                </StackPanel>
+                                            </Grid>
+                                            <Slider x:Name="GuardSpeakerVolumeSlider"
+                                                    Style="{StaticResource PercentSlider}"
+                                                    ValueChanged="SettingChanged"
+                                                    AutomationProperties.Name="{DynamicResource GuardVolume}" />
+                                        </StackPanel>
+                                                                                <StackPanel Margin="0,0,28,15">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Foreground="{StaticResource PrimaryTextBrush}" Text="{DynamicResource Parry}" VerticalAlignment="Center" />
+                                                <TextBlock Grid.Column="1" x:Name="ParrySpeakerVolumeText" Margin="12,0" VerticalAlignment="Center"
+                                                           Foreground="{StaticResource GoldBrightBrush}" />
+                                                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                                    <Button x:Name="ParryBladePreviewButton" Style="{StaticResource SoundPreviewButton}" Content="{DynamicResource BladeParry}" Tag="12" Click="SoundPreview_Click" AutomationProperties.Name="{DynamicResource PreviewBladeParrySound}" />
+                                                    <Button x:Name="ParryProjectilePreviewButton" Margin="6,0,0,0" Style="{StaticResource SoundPreviewButton}" Content="{DynamicResource ProjectileParry}" Tag="13" Click="SoundPreview_Click" AutomationProperties.Name="{DynamicResource PreviewProjectileParrySound}" />
+                                                </StackPanel>
+                                            </Grid>
+                                            <Slider x:Name="ParrySpeakerVolumeSlider"
+                                                    Style="{StaticResource PercentSlider}"
+                                                    ValueChanged="SettingChanged"
+                                                    AutomationProperties.Name="{DynamicResource ParrySoundVolume}" />
+                                        </StackPanel>
+                                        <StackPanel Margin="0,0,0,15">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Foreground="{StaticResource PrimaryTextBrush}" Text="{DynamicResource Deflect}" VerticalAlignment="Center" />
+                                                <TextBlock Grid.Column="1" x:Name="DeflectSpeakerVolumeText" Margin="12,0" VerticalAlignment="Center"
+                                                           Foreground="{StaticResource GoldBrightBrush}" />
+                                                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                                    <Button x:Name="DeflectSpeakerPreviewButton" Style="{StaticResource SoundPreviewButton}" Content="{DynamicResource Preview}" Tag="6" Click="SoundPreview_Click" AutomationProperties.Name="{DynamicResource PreviewDeflect}" />
+                                                </StackPanel>
+                                            </Grid>
+                                            <Slider x:Name="DeflectSpeakerVolumeSlider"
+                                                    Style="{StaticResource PercentSlider}"
+                                                    ValueChanged="SettingChanged"
+                                                    AutomationProperties.Name="{DynamicResource DeflectVolume}" />
+                                        </StackPanel>
+                                        <StackPanel Margin="0,0,28,15">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Foreground="{StaticResource PrimaryTextBrush}" Text="{DynamicResource Execution}" VerticalAlignment="Center" />
+                                                <TextBlock Grid.Column="1" x:Name="ExecutionSpeakerVolumeText" Margin="12,0" VerticalAlignment="Center"
+                                                           Foreground="{StaticResource GoldBrightBrush}" />
+                                                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                                    <Button x:Name="ExecutionSpeakerPreviewButton" Style="{StaticResource SoundPreviewButton}" Content="{DynamicResource Preview}" Tag="7" Click="SoundPreview_Click" AutomationProperties.Name="{DynamicResource PreviewExecution}" />
+                                                </StackPanel>
+                                            </Grid>
+                                            <Slider x:Name="ExecutionSpeakerVolumeSlider"
+                                                    Style="{StaticResource PercentSlider}"
+                                                    ValueChanged="SettingChanged"
+                                                    AutomationProperties.Name="{DynamicResource ExecutionVolume}" />
+                                        </StackPanel>
+                                        <StackPanel Margin="0,0,0,15">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Foreground="{StaticResource PrimaryTextBrush}" Text="{DynamicResource Issen}" VerticalAlignment="Center" />
+                                                <TextBlock Grid.Column="1" x:Name="IssenSpeakerVolumeText" Margin="12,0" VerticalAlignment="Center"
+                                                           Foreground="{StaticResource GoldBrightBrush}" />
+                                                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                                    <Button x:Name="IssenSpeakerPreviewButton" Style="{StaticResource SoundPreviewButton}" Content="{DynamicResource Preview}" Tag="11" Click="SoundPreview_Click" AutomationProperties.Name="{DynamicResource PreviewIssen}" />
+                                                </StackPanel>
+                                            </Grid>
+                                            <Slider x:Name="IssenSpeakerVolumeSlider"
+                                                    Style="{StaticResource PercentSlider}"
+                                                    ValueChanged="SettingChanged"
+                                                    AutomationProperties.Name="{DynamicResource Issenvolume}" />
+                                        </StackPanel>
+                                    </UniformGrid>
+                                    <TextBlock x:Name="SpeakerPreviewStatusText" Margin="0,4,0,0" Visibility="Collapsed"
+                                               Foreground="{StaticResource MutedTextBrush}" TextWrapping="Wrap" LineHeight="20"
+                                               Text="{DynamicResource StartTheGameAndConnectAControllerToPreviewAudio}" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                        <TextBlock x:Name="SettingsStatusText" Margin="2,14,0,0"
+                                   Foreground="{StaticResource SuccessBrush}" />
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="{DynamicResource SupportNotices}" Style="{StaticResource SamuraiTabItem}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel Margin="30,24,30,30">
+                        <TextBlock Style="{StaticResource EyebrowText}" Text="{DynamicResource SupportVoluntaryDonations}" />
+                        <TextBlock Margin="0,5,0,12" Style="{StaticResource SectionTitle}" Text="{DynamicResource SupportDevelopment}" />
+                        <Border Style="{StaticResource CardBorder}" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock FontWeight="SemiBold" Foreground="#DB897E"
+                                           TextWrapping="Wrap" Text="{DynamicResource DonationNoResaleSummary}" />
+                                <TextBlock Margin="0,8,0,0" TextWrapping="Wrap" LineHeight="21" Foreground="{StaticResource MutedTextBrush}"
+                                           Text="{DynamicResource VoluntaryDonationNote}" />
+                            </StackPanel>
+                        </Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="18" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" Style="{StaticResource CardBorder}">
+                                <StackPanel>
+                                    <TextBlock FontSize="19" FontWeight="SemiBold" Text="{DynamicResource Alipay}" />
+                                    <Border Margin="0,12,0,0" Height="246" Background="White" Padding="12" CornerRadius="3">
+                                        <Grid>
+                                            <Image x:Name="AlipayDonationImage" Stretch="Uniform" />
+                                            <TextBlock x:Name="AlipayMissingText" Foreground="#444444" TextAlignment="Center"
+                                                       VerticalAlignment="Center" Text="{DynamicResource DonateImageMissing}" TextWrapping="Wrap" />
+                                        </Grid>
+                                    </Border>
+                                </StackPanel>
+                            </Border>
+                            <Border Grid.Column="2" Style="{StaticResource CardBorder}">
+                                <StackPanel>
+                                    <TextBlock FontSize="19" FontWeight="SemiBold" Text="{DynamicResource WechatPay}" />
+                                    <Border Margin="0,12,0,0" Height="246" Background="White" Padding="12" CornerRadius="3">
+                                        <Grid>
+                                            <Image x:Name="WechatDonationImage" Stretch="Uniform" />
+                                            <TextBlock x:Name="WechatMissingText" Foreground="#444444" TextAlignment="Center"
+                                                       VerticalAlignment="Center" Text="{DynamicResource DonateImageMissing}" TextWrapping="Wrap" />
+                                        </Grid>
+                                    </Border>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                        <Border Margin="0,16,0,0" Style="{StaticResource CardBorder}" BorderBrush="{StaticResource CrimsonBrush}">
+                            <StackPanel>
+                                <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="#DB897E" Text="{DynamicResource NoPaidResaleOrMisleadingRepackaging}" />
+                                <TextBlock Margin="0,8,0,0" TextWrapping="Wrap" LineHeight="21"
+                                           Text="{DynamicResource NoResaleNotice}" />
+                                <Button Margin="0,12,0,0" HorizontalAlignment="Left" Content="{DynamicResource ContactUpdateNotifications}" Click="ShowContactQr_Click" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="{DynamicResource About}" Style="{StaticResource SamuraiTabItem}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel Margin="30,24,30,30">
+                        <TextBlock Style="{StaticResource EyebrowText}" Text="{DynamicResource InformationAbout}" />
+                        <TextBlock Margin="0,5,0,18" Style="{StaticResource SectionTitle}" Text="{DynamicResource AboutThisProduct}" />
+                        <Border Style="{StaticResource CardBorder}">
+                            <StackPanel>
+                                <TextBlock Foreground="{StaticResource PrimaryTextBrush}" TextWrapping="Wrap"
+                                           LineHeight="24"
+                                           x:Name="AboutBehaviorText" Text="{DynamicResource ThisIsAnUnofficialPcDualsenseEnhancementItFollowsIn}" />
+                                <Border Margin="0,18" BorderBrush="#3D3420" BorderThickness="0,1,0,0" />
+                                <TextBlock Foreground="{StaticResource MutedTextBrush}" TextWrapping="Wrap"
+                                           LineHeight="22"
+                                           Text="{DynamicResource LicenseInformation}" />
+                                <TextBlock Margin="0,12,0,0" Foreground="{StaticResource MutedTextBrush}"
+                                           TextWrapping="Wrap" LineHeight="22"
+                                           Text="{DynamicResource ThisBuildIsNotCodeSignedWindowsMayShowAn}" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+
+        <Border Grid.Row="2" Background="#0C0C0A" BorderBrush="#40351F" BorderThickness="0,1,0,0">
+            <Grid Margin="18,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="8" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Border Width="5" Height="5" CornerRadius="3" Background="{StaticResource GoldBrush}"
+                        VerticalAlignment="Center" />
+                <TextBlock Grid.Column="2" x:Name="FooterText" VerticalAlignment="Center"
+                           Foreground="#8F8B82" FontSize="11" Text="{DynamicResource Ready}" />
+                <TextBlock Grid.Column="3" VerticalAlignment="Center" Foreground="#5D594F" FontSize="10"
+                           x:Name="ConnectionModeText" Text="{DynamicResource UsbBluetooth}" />
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

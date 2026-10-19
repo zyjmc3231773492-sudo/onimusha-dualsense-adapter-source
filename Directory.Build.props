@@ -1,0 +1,14 @@
+<Project>
+  <PropertyGroup>
+    <Version>2.3</Version>
+    <AssemblyVersion>2.3.0.0</AssemblyVersion>
+    <FileVersion>2.3.0.0</FileVersion>
+    <Company>鬼武者 PS5 手柄适配工具</Company>
+    <Product>鬼武者 PS5 手柄适配工具（非官方）</Product>
+    <Authors>版权所有者</Authors>
+    <Copyright>Copyright © 2026. Source available; commercial resale prohibited.</Copyright>
+    <Deterministic>true</Deterministic>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+</Project>

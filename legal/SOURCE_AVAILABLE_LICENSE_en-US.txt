@@ -1,0 +1,25 @@
+Onimusha PS5 Controller Adapter 2.3 (Unofficial)
+Source-Available License — No Commercial Resale
+
+This software is free to use. No activation key or ten-minute trial is required.
+Donations are entirely voluntary and do not affect features or access.
+
+You may use, study, copy, modify and redistribute the project's original code
+free of charge. Retain LICENSE.txt, copyright and third-party notices. Clearly
+identify modified releases as modified and unofficial.
+You may not sell this software, copies, modifications, installers or paid
+bundles, or disguise a charge for software access as an activation fee,
+membership, mandatory donation or installation fee. Commercial resale
+requires separate written permission. Do not impersonate the author's
+official release or mislead users into believing payment is required.
+
+The no-resale restriction makes this a source-available project, not an
+OSI-approved open-source project. See LICENSE.txt for the full terms.
+Third-party components retain their own licenses and the rights they grant.
+Game-derived audio, trademarks and other third-party assets are not
+relicensed as this project's original code.
+
+This is not an official Capcom or Sony product. A legally installed copy of
+the supported game is required. The software is provided as is, without
+guarantees of hardware, game-version or other-mod compatibility. To the
+extent permitted by applicable law, it comes without warranty or liability.

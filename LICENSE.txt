@@ -1,0 +1,61 @@
+Source-Available License — No Commercial Resale (2026)
+源码公开许可 — 禁止商业转售（2026）
+
+Copyright (c) 2026 the respective project copyright holders.
+Copyright is retained by each contributor / asset owner.
+
+This project's original code is source available, NOT licensed under an
+OSI-approved open-source license. The no-resale restriction below is
+incompatible with the OSI Open Source Definition.
+
+Permission is granted to use, study, copy and modify the project's original
+code, including use within a business. You may redistribute the original
+code and your modifications free of charge, provided you retain this license,
+copyright and attribution notices and identify modified distributions as
+modified and unofficial. These permissions apply to versions distributed
+under this license; they do not retroactively relicense earlier releases.
+
+You may not sell this software, copies, modified versions, bundled versions,
+installers or activation/unlock access, or make payment or a donation a
+condition of downloading, installing or using it. You may not disguise a
+charge for access as a “mandatory donation”, “activation fee”, “membership”
+or “installation fee”. Distribution on a paid-access basis, or resale within
+a paid software bundle, requires separate written permission from the
+relevant copyright holders. Do not claim that an unofficial or modified
+copy is the author's official release, or mislead users about the official
+release being free. Independently agreed support services do not grant a
+right to charge for the software or access to it.
+
+Donations to the author are voluntary and grant no extra features, access,
+priority support or ownership. Do not imply an affiliation with Capcom or
+Sony or use their trademarks in a way that suggests endorsement.
+
+Third-party code and components remain under their respective licenses in
+legal/ and third_party/. This license does not restrict rights those licenses
+already grant. Game-derived audio, trademarks, payment service artwork and
+other third-party assets are not relicensed as this project's original code.
+Their presence does not grant independent rights to reuse or redistribute
+them beyond any separate authorization you hold.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. TO THE EXTENT PERMITTED BY APPLICABLE LAW, THE COPYRIGHT
+HOLDERS SHALL NOT BE LIABLE FOR CLAIMS OR DAMAGES ARISING FROM THE SOFTWARE.
+If you breach the conditions of this permission, the permission terminates.
+
+中文对照：
+本项目原创代码采用“源码公开、禁止商业转售”许可，不属于 OSI 标准开源。
+允许使用、学习、复制、修改，包括企业内部使用；允许免费分发源码及修改版，
+但必须保留许可、著作权和署名声明，并清楚标记修改版及非官方身份。
+该许可适用于按本许可发布的版本，不追溯改变历史版本的许可。
+未经相关权利人另行书面同意，不得出售本软件、副本、修改版、付费捆绑版、
+安装包或激活/解锁权限；不得把付款或捐赠作为下载、安装、使用条件，
+不得通过“强制捐赠”“激活费”“会员费”“安装费”等名称变相收取软件访问费。
+不得冒充作者官方版本，或误导用户认为官方免费版本需要付款。
+独立约定的支持服务并不授予出售本软件或访问权限的权利。
+捐赠完全自愿，不解锁额外功能、访问权限、优先服务或所有权。
+第三方代码遵循其自身许可，本许可不限制第三方许可已经授予的权利。
+游戏派生音频、商标、支付平台图像等第三方素材不按本项目原创代码重新授权；
+软件内包含这些素材并不授予超出单独授权范围的复用或再分发权利。
+软件按现状提供，在适用法律允许范围内不提供保证，权利人不承担相关损失。
+违反上述条件时，本许可授予的权限终止。

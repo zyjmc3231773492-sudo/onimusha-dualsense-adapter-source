@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>OnimushaPS5Adapter.Core</RootNamespace>
+    <AssemblyName>OnimushaPS5Adapter.Core</AssemblyName>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Historical issuer sources are archived; the free runtime has no entitlement or machine identity API. -->
+    <Compile Remove="EntitlementService.cs;MachineIdentity.cs;LicenseCodec.cs;DeviceCodeCodec.cs" />
+  </ItemGroup>
+</Project>
+

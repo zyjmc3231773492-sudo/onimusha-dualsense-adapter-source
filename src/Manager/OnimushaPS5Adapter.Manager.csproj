@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <AssemblyName>OnimushaPS5Adapter.Manager</AssemblyName>
+    <RootNamespace>OnimushaPS5Adapter.Manager</RootNamespace>
+    <PlatformTarget>x64</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>..\..\assets\branding\onimusha-ps5-adapter.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <BluetoothEnabled Condition="'$(BluetoothEnabled)' == ''">true</BluetoothEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(BluetoothEnabled)' == 'true'">
+    <DefineConstants>$(DefineConstants);ONIMUSHA_BLUETOOTH_ENABLED</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(StartupCompatibilityRepair)' == 'true'">
+    <DefineConstants>$(DefineConstants);ONIMUSHA_STARTUP_REPAIR</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Product.Core\OnimushaPS5Adapter.Core.csproj"
+                      Condition="'$(PackagedCorePath)' == ''" />
+    <Reference Include="OnimushaPS5Adapter.Core" Condition="'$(PackagedCorePath)' != ''">
+      <HintPath>$(PackagedCorePath)</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Compile Include="..\Ui.Shared\SafeClipboard.cs" Link="SafeClipboard.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Localization\*.json" />
+    <Resource Include="..\..\assets\branding\manager-controller-art-v1.png"
+              Link="Assets\manager-controller-art-v1.png" />
+    <Content Include="..\..\assets\branding\wechat-contact.jpg"
+             Link="assets\wechat-contact.jpg"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="..\..\assets\branding\donate-alipay.jpg"
+             Link="assets\donate-alipay.jpg"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="..\..\assets\branding\donate-wechat.jpg"
+             Link="assets\donate-wechat.jpg"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="..\..\assets\branding\qq-update-group.jpg"
+             Link="assets\qq-update-group.jpg"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

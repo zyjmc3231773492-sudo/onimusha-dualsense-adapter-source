@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <ItemGroup>
+    <Using Include="System.IO" />
+    <ProjectReference Include="../../src/Product.Core/OnimushaPS5Adapter.Core.csproj" />
+    <Compile Include="../../src/Manager/SpeakerPreviewService.cs" Link="SpeakerPreviewService.cs" />
+    <Compile Include="../../src/Manager/UiText.cs" Link="UiText.cs" />
+    <EmbeddedResource Include="../../src/Manager/Localization/*.json"
+                      LogicalName="OnimushaPS5Adapter.Manager.Localization.%(Filename)%(Extension)" />
+  </ItemGroup>
+</Project>

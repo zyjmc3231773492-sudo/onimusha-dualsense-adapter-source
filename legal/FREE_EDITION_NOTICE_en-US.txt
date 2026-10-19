@@ -1,0 +1,20 @@
+Free release notice / Do not resell
+
+1. All features are free. No activation or trial countdown is required.
+2. Do not buy “activation keys”, “lifetime licenses” or “donation unlocks”.
+   This release does not require any of them.
+3. Resale, paid repackaging, mandatory donations and impersonation of the
+   author's official release are prohibited.
+4. Donations support the author voluntarily. They do not buy the software,
+   unlock features or grant priority support.
+5. The author supplied the payment QR images. Check the recipient and amount
+   in your payment app before paying. This software does not create orders,
+   read payment status or request payment passwords.
+6. Source is available under a no-commercial-resale license. This is not
+   an OSI-approved open-source license.
+7. This unofficial tool is not affiliated with Capcom, Sony, WeChat or Alipay.
+8. Installation, repair and removal affect mod files in the game directory.
+   Close the game before these operations.
+
+If you encounter paid or impersonated copies, retain the link and evidence
+and report them through the author's existing contact channels.
